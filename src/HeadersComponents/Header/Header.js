@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import cartImg from '../../assets/cart.png'
 import './Header.scss'
 
 const Header = () => {
@@ -43,7 +44,10 @@ const Header = () => {
         </Link>
 
         <Link className={cart === 0 ? 'Link-starter-store' : 'link-active'} to='/cart'>
-          <div className="one-of-items">Cart</div>
+          <div className="one-of-items">
+            <img className="img-cart" src={cartImg} alt='cart' />
+            <div>Cart</div>
+          </div>
         </Link>
 
       </div>

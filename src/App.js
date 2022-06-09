@@ -5,6 +5,7 @@ import StarterStore from './HeadersComponents/StarterStore/StarterStore';
 import SignUp from './HeadersComponents/SignUp/SignUp';
 import SignIn from './HeadersComponents/SignIn/SignIn';
 import Cart from './HeadersComponents/Cart/Cart';
+import Product from './HeadersComponents/StarterStore/Product/Product';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='starter-store/:id' element={<Product />} />
       </Routes>
     </div>
   );
