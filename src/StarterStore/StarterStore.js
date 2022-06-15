@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import MyContext from "../Context/MyContext";
+import ProductContext from "../Context/ProductContext";
 import img from '../assets/lovelamps.png'
 import './StarterStore.scss'
 
 const StarterStore = () => {
 
-  const { allItemsObj } = useContext(MyContext)
+  const { allItemsObj } = useContext(ProductContext)
 
   return (
     <div className="starter-store-main">
