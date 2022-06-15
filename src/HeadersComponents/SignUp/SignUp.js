@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import * as yup from 'yup'
-import './SignUp.scss'
+import './SignUpAndSignIn.scss'
 import { Button, FormLabel } from "@mui/material";
-
+// import axios from '../../api/axios'
 
 const SignUp = () => {
+
+  // useEffect(() => {
+  //   axios.get('/api/users/allUsers')
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     })
+  // }, [])
 
   const validationSchema = yup.object().shape({
     name: yup.string().min('5').max('20').typeError('Must be a string').required(<div className="validation-message">Must add a value</div>),
@@ -15,21 +25,50 @@ const SignUp = () => {
     confirmEmail: yup.string().email('Please add a true email').oneOf([yup.ref('email')], 'Emails are not the same').required(<div className="validation-message">Must add a value</div>)
   })
 
+  // const submitData = async (values) => {
+  //   const { name, email, password } = values
+  //   {
+  //     await axios.post('controllers/userControllers/registration',
+  //       {
+  //         userName: name,
+  //         email: email,
+  //         password: password,
+  //         isAdmin: false
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json;charset=utf-8",
+  //           "Access-Control-Allow-Origin": "*",
+  //         }
+  //       }
+  //     )
+  //       .then((response) => {
+  //         console.log(response.data)
+  //       })
+  //       .catch((error) => {
+  //         console.log(error)
+  //       })
+  //   }
+  // }
+
   return (
     <div>
-      <h3>Create an account</h3>
       <div className="sign-up">
+        <header>
+          <h3>Create an account</h3>
+        </header>
         <Formik
           initialValues={{
             name: '',
-            secondName: '',
             password: '',
             confirmPassword: '',
             email: '',
             confirmEmail: ''
           }}
           validateOnBlur
-          onSubmit={(values) => { console.log(values) }}
+          onSubmit={
+            (values) => { console.log(values) }
+          }
           validationSchema={validationSchema}
         >
           {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
