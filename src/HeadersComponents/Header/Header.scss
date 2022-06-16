@@ -40,6 +40,16 @@
     padding: 20px;
   }
 
+  .username-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .logout {
+    padding: 20px;
+  }
+
   .starter-store:focus {
     background-color: gray;
   }

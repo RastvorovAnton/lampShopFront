@@ -1,12 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import cartImg from '../../assets/cart.png'
 import './Header.scss'
 
 const Header = () => {
 
   const setActive = ({ isActive }) => isActive ? 'active-link' : 'non-active-link'
+  const userName = localStorage.getItem('userName')
+  const location = useLocation()
 
+  const clearStorage = () => {
+    localStorage.clear()
+  }
 
   return (
     <header className="all-header">
@@ -16,24 +21,37 @@ const Header = () => {
         </NavLink>
       </div>
 
-      <div className="right-items">
+      {localStorage.hasOwnProperty('userName') === false ?
+        <div className="right-items">
+          <NavLink className={setActive} to='/sign-up'>
+            <div className="one-of-items">Sign up</div>
+          </NavLink>
 
-        <NavLink className={setActive} to='/sign-up'>
-          <div className="one-of-items">Sign up</div>
-        </NavLink>
+          <NavLink className={setActive} to='/sign-in'>
+            <div className="one-of-items">Sign in</div>
+          </NavLink>
 
-        <NavLink className={setActive} to='/sign-in'>
-          <div className="one-of-items">Sign in</div>
-        </NavLink>
-
-        <NavLink className={setActive} to='/cart'>
-          <div className="one-of-items">
-            <img className="img-cart" src={cartImg} alt='cart' />
-            <div>Cart</div>
-          </div>
-        </NavLink>
-      </div>
-
+          <NavLink className={setActive} to='/cart'>
+            <div className="one-of-items">
+              <img className="img-cart" src={cartImg} alt='cart' />
+              <div>Cart</div>
+            </div>
+          </NavLink>
+        </div>
+        :
+        <div className="right-items">
+          <div className="username-item">{userName}</div>
+          <NavLink className={setActive} to='/sign-in'>
+            <div className="logout" onClick={clearStorage}>Log out</div>
+          </NavLink>
+          <NavLink className={setActive} to='/cart'>
+            <div className="one-of-items">
+              <img className="img-cart" src={cartImg} alt='cart' />
+              <div>Cart</div>
+            </div>
+          </NavLink>
+        </div>
+      }
 
       <div className="hamburger-menu">
         <input id="menu__toggle" type="checkbox" />

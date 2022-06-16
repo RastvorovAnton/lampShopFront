@@ -1,55 +1,46 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from 'yup'
 import './SignUpAndSignIn.scss'
 import { Button, FormLabel } from "@mui/material";
-// import axios from '../../api/axios'
+import axios from '../../api/axios'
 
 const SignUp = () => {
 
-  // useEffect(() => {
-  //   axios.get('/api/users/allUsers')
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     })
-  // }, [])
+  const navigate = useNavigate()
 
   const validationSchema = yup.object().shape({
     name: yup.string().min('5').max('20').typeError('Must be a string').required(<div className="validation-message">Must add a value</div>),
-    password: yup.string().min('8').typeError('Must be a string').required(<div className="validation-message">Must add a value</div>),
+    password: yup.string().min('2').typeError('Must be a string').required(<div className="validation-message">Must add a value</div>),
     confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords are not the same').required(<div className="validation-message">Must add a value</div>),
     email: yup.string().email('Please add an email').required(<div className="validation-message">Must add a value</div>),
     confirmEmail: yup.string().email('Please add a true email').oneOf([yup.ref('email')], 'Emails are not the same').required(<div className="validation-message">Must add a value</div>)
   })
 
-  // const submitData = async (values) => {
-  //   const { name, email, password } = values
-  //   {
-  //     await axios.post('controllers/userControllers/registration',
-  //       {
-  //         userName: name,
-  //         email: email,
-  //         password: password,
-  //         isAdmin: false
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json;charset=utf-8",
-  //           "Access-Control-Allow-Origin": "*",
-  //         }
-  //       }
-  //     )
-  //       .then((response) => {
-  //         console.log(response.data)
-  //       })
-  //       .catch((error) => {
-  //         console.log(error)
-  //       })
-  //   }
-  // }
+  const submitData = async (values) => {
+    const { name, email, password } = values
+    {
+      await axios.post('/api/users/registration',
+        {
+          userName: name,
+          email: email,
+          password: password,
+          isAdmin: false
+        }
+      )
+        .then((res) => {
+          console.log(res.data)
+          localStorage.setItem('accessToken', res.data.accessToken)
+          localStorage.setItem('refreshToken', res.data.refreshToken)
+          localStorage.setItem('userName', res.data.data.userName)
+          navigate(`/starter-store`)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 
   return (
     <div>
@@ -67,7 +58,7 @@ const SignUp = () => {
           }}
           validateOnBlur
           onSubmit={
-            (values) => { console.log(values) }
+            (values) => { submitData(values) }
           }
           validationSchema={validationSchema}
         >
