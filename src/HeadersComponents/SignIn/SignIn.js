@@ -22,7 +22,6 @@ const SignIn = () => {
           }
         )
         .then((res) => {
-          console.log(res.data)
           localStorage.setItem('accessToken', res.data.accessToken)
           localStorage.setItem('refreshToken', res.data.refreshToken)
           localStorage.setItem('userName', res.data.user.userName)

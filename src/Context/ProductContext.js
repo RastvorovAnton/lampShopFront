@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "../api/axios";
+import React from "react";
 import lamp1 from '../assets/lamp-1.png'
 import lamp2 from '../assets/lamp-2.png'
 import lamp3 from '../assets/lamp-3.png'
@@ -49,6 +48,7 @@ const ProductProvider = props => {
       price: '400$'
     }
   ]
+
 
   const context = {
     allItemsObj
