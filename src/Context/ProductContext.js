@@ -49,7 +49,6 @@ const ProductProvider = props => {
     }
   ]
 
-
   const context = {
     allItemsObj
   }
@@ -59,3 +58,6 @@ const ProductProvider = props => {
 
 export { ProductProvider, Consumer as ProductConsumer }
 export default ProductContext
+
+
+
