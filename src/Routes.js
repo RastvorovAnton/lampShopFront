@@ -1,5 +1,5 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Admin from './Admin/Admin'
 import StarterStore from "./StarterStore/StarterStore";
 import SignIn from "./HeadersComponents/SignIn/SignIn";
 import SignUp from "./HeadersComponents/SignUp/SignUp";
@@ -12,6 +12,7 @@ const RoutesComponent = () => {
     <div>
       <Routes>
         <Route path='/starter-store' element={<StarterStore />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path='/' element={<StarterStore />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
